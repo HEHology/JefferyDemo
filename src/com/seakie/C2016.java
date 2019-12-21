@@ -1,6 +1,5 @@
 package com.seakie;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -37,6 +36,7 @@ public class C2016 {
 			System.out.println(-1);
 			break;
 		}
+		sc.close();
 	}
 
 	public static void q4ArralTime() {
@@ -68,6 +68,8 @@ public class C2016 {
 		System.out.println(
 			String.format("%02d:%02d", (now / 60) % 24, now % 60)
 				);
+		
+		scan.close();
 	}
 
 	private static boolean isRushHour(int nowMin) {

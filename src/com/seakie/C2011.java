@@ -22,6 +22,8 @@ public class C2011 {
 		if ((antennas <= 2) && (eyes <= 3)) {
 			System.out.println("GraemeMercurian");
 		}
+		
+		scan.close();
 	}
 
 	public static void q2Ballon() {
@@ -42,6 +44,8 @@ public class C2011 {
 			System.out.println("The balloon first touches ground at hour:");
 			System.out.println(t);
 		}
+		
+		scan.close();
 	}
 
 }

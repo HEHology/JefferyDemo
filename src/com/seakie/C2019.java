@@ -26,6 +26,7 @@ public class C2019 {
 		// and use the string
 			goThroughLine(str);
 		}
+		sc.close();
 	}
 
 	public static void goThroughLine(String str) {
@@ -130,6 +131,7 @@ public class C2019 {
 				hOnArr(arr);
 		}
 		printArr(arr);
+		sc.close();
 	}
 
 	private static void vOnArr(int[][] arr) {
@@ -163,7 +165,6 @@ public class C2019 {
 
 	public static void q5RuleOfThree() {
 		LinkedHashMap<String, String> rules = new LinkedHashMap<String, String>();
-		ArrayList<String> lines = new ArrayList<String>();
 		Scanner sc = new Scanner(System.in);
 		for (int i = 0; i < 3; i++) {
 			String[] info = sc.nextLine().split(" ");
@@ -176,6 +177,8 @@ public class C2019 {
 		
 		System.out.println(rules);
 		System.out.println(starter.length);
+		
+		sc.close();
 	}
 
 }

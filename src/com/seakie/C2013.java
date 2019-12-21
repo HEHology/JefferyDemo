@@ -25,7 +25,6 @@ public class C2013 {
 		ArrayList<C2013Q5Match> games = new ArrayList<C2013Q5Match>();
 		int score[] = new int[5];
 		Scanner sc = new Scanner(System.in);
-		int myTeam = sc.nextInt();
 		int passed = sc.nextInt();
 		for (int i = 0; i < passed; i ++) {
 			int team1 = sc.nextInt();
@@ -63,6 +62,7 @@ public class C2013 {
 		for (int i = 0; i < score.length; i++) {
 			System.out.println(i + " " + score[i]);
 		}
+		sc.close();
 	}
 
 }
