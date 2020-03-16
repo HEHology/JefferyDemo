@@ -181,4 +181,27 @@ public class C2019 {
 		sc.close();
 	}
 
+	public static void q2Time2Compress() {
+		Scanner sc = new Scanner(System.in);
+		int total = sc.nextInt();
+		sc.nextLine();
+		ArrayList<String> strings = new ArrayList<String>();
+		
+		for (int index = 0; index < total; index ++) {
+			String line = sc.nextLine();
+			strings.add(line);
+		}
+		
+		for (int index = 0; index < strings.size(); index ++) {
+			String[] parts = strings.get(index).split(" ");
+			int times = Integer.parseInt(parts[0]);
+			String ch = parts[1];
+			
+			for (int time = 0; time < times; time++){
+				System.out.print(ch);
+			}
+			System.out.println();
+		}
+		sc.close();
+	}
 }

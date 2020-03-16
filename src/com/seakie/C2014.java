@@ -46,4 +46,26 @@ public class C2014 {
 			System.out.println("Scalene.");
 	}
 
+	public static void q2Vote() {
+		int all = scan.nextInt();
+		scan.nextLine();
+		String vote = scan.nextLine();
+		int ticketA = 0;
+		int ticketB = 0;
+		for (int index = 0; index < all; index ++){
+			if (vote.charAt(index) == 'A'){
+				ticketA ++;
+			} else if (vote.charAt(index) == 'B'){
+				ticketB ++;
+			}
+		}
+		
+		if (ticketA > ticketB) {
+			System.out.println("A");
+		} else if (ticketA < ticketB) {
+			System.out.println("B");
+		} else {
+			System.out.println("Tie");
+		}
+	}
 }
