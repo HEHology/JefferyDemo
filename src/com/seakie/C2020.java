@@ -41,10 +41,13 @@ public class C2020 {
 			
 			System.out.println(result);
 			if (isEnded(result) == true) {
-				break;
+				System.out.println("yes");
+				return;
 			}
 			index ++;
 		}
+		
+		System.out.println("no");
 	}
 
 	private static boolean isEnded(ArrayList<Node> result) {
