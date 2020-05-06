@@ -25,22 +25,22 @@ public class C2020 {
 				{6, 2, 3, 9}
 				};
 		
-		ArrayList<Node> result = new ArrayList<Node>();
-		result.add(new Node(0, 0, 3));
+		ArrayList<Node> tree = new ArrayList<Node>();
+		tree.add(new Node(0, 0, 3));
 		
 		int index = 0;
-		while(index < result.size()) {
-			Node current = result.get(index);
+		while(index < tree.size()) {
+			Node current = tree.get(index);
 			ArrayList<Node> localList = getSubNodes(current, matrix);
 			
 			for (Node node : localList) {
-				if (isInside(node, result) == false){
-					result.add(node);
+				if (isInside(node, tree) == false){
+					tree.add(node);
 				}
 			}
 			
-			System.out.println(result);
-			if (isEnded(result) == true) {
+			System.out.println(tree);
+			if (isEnded(tree) == true) {
 				System.out.println("yes");
 				return;
 			}
