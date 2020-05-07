@@ -3,13 +3,6 @@ package com.seakie;
 import java.util.ArrayList;
 
 class Node {
-	@Override
-	public String toString() {
-		return "(" + x + " " + y + " " + value + ")";
-	}
-	public Node(int i, int j, int k) {
-		x = i; y = j; value = k;
-	}
 	public int x;
 	public int y;
 	public int value;
@@ -26,7 +19,11 @@ public class C2020 {
 				};
 		
 		ArrayList<Node> tree = new ArrayList<Node>();
-		tree.add(new Node(0, 0, 3));
+		Node root = new Node();
+		root.x = 0;
+		root.y = 0;
+		root.value = 3;
+		tree.add(root);
 		
 		int index = 0;
 		while(index < tree.size()) {
@@ -39,7 +36,7 @@ public class C2020 {
 				}
 			}
 			
-			System.out.println(tree);
+//			System.out.println(tree);
 			if (isEnded(tree) == true) {
 				System.out.println("yes");
 				return;
@@ -71,11 +68,15 @@ public class C2020 {
 	private static ArrayList<Node> getSubNodes(Node current, int[][] matrix) {
 		ArrayList<Node> local = new ArrayList<Node>();
 		
-		for (int a = 0; a <= current.value; a++){
-			for (int b = 0; b <= current.value; b ++) {
-				if (a * b == current.value) {
-					if (a <= row && b <= col) {
-						local.add(new Node(a - 1, b - 1, matrix[a - 1][b - 1]));
+		for (int xPosition = 0; xPosition <= current.value; xPosition++){
+			for (int yPosition = 0; yPosition <= current.value; yPosition ++) {
+				if (xPosition * yPosition == current.value) {
+					if (xPosition <= row && yPosition <= col) {
+						Node sub = new Node();
+						sub.x = xPosition - 1;
+						sub.y = yPosition - 1;
+						sub.value = matrix[xPosition - 1][yPosition - 1];
+						local.add(sub);
 					}
 				}
 			}
