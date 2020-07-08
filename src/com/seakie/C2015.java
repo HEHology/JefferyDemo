@@ -1,9 +1,20 @@
 package com.seakie;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.Scanner;
 import java.util.Set;
+
+class Sms {
+	public char action;
+	public int person;
+	@Override
+	public String toString() {
+		return "" + action + "-" + person ;
+	}
+	
+}
 
 public class C2015 {
 	static int pies = 8;
@@ -164,47 +175,86 @@ S 2
 S 3
 	 */
 	public static void q4WaitTime() {
-		int all = scan.nextInt();
+		Scanner scan = new Scanner(System.in);
+		int count = scan.nextInt(); // for length of timeline
 		scan.nextLine();
-		ArrayList<Integer> record = new ArrayList<Integer>();
+		Sms[] timeline = new Sms[count * 2];
+		int currentTime = 0;
 		
-		for (int i = 0; i < all; i++){
-			String line = scan.nextLine();
-			String[] parts = line.split(" ");
-			int data = Integer.parseInt(parts[1]);
+		for (int index = 0; index < count; index++){
+			// S 2 or R 3
+			String message = scan.nextLine();
+			String[] segments = message.split(" ");
 			
-			switch(parts[0]){
-			case "S":
+			String state = segments[0];
+			
+			switch (state) {
 			case "R":
-				record.add(data);
+			case "S":
+				// Receive
+				// send
+				record(segments, currentTime, timeline);
+				currentTime ++;
 				break;
 			case "W":
-				for (int j = 1; j < data; j++){
-					record.add(-1);
-				}
+				// wait
+				currentTime += wait(segments);
 				break;
+			default:
+				break;
+			}
+//			System.out.println(message);
+		}
+		
+		System.out.println(Arrays.toString(timeline));
+		printResult(timeline);
+		scan.close();
+	}
+
+	private static void printResult(Sms[] timeline) {
+		int[] recording = new int[1000];
+		
+		for (int start = 0; start < timeline.length; start++){
+			Sms currentUnit = timeline[start];
+			if (currentUnit == null)
+				continue;
+			int endPos = - 1; // Assume I cannot find ending
+			if (currentUnit.action == 'R'){
+				for (int end = start + 1; end < timeline.length; end++){
+					Sms endUnit = timeline[end];
+					if (endUnit == null)
+						continue;
+					if (endUnit.action == 'S' && endUnit.person == currentUnit.person){
+						endPos = end;
+						break;
+					}
+				}
+				if (endPos != -1) {
+					recording[currentUnit.person] += endPos - start;
+				} else {
+					recording[currentUnit.person] = -1;
+				}
 			}
 		}
 		
-		System.out.println(record);
-		
-//		LinkedHashMap<Integer, Integer> result = new LinkedHashMap<Integer, Integer>();
-//		for (int i = 0; i < record.size(); i++){
-//			int code = record.get(i);
-//			if (result.get(code) == null && code != -1){
-//				result.put(code, 0);
-//			}
-//			for (int key : result.keySet()){
-//				if (result.get(key) % 2 == 1){
-//					result.put(key, result.get(key) + 1);
-//				}
-//			}
-////			result.put(code, )
-//		}
-		
-//		System.out.println(result);
+		for (int index = 0; index < recording.length; index++){
+			if (recording[index] != 0) {
+				System.out.println(index + " " + recording[index]);
+			}
+		}
 	}
 
+	private static int wait(String[] segments) {
+		return Integer.parseInt(segments[1]) - 1;
+	}
+
+	private static void record(String[] segments, int currentTime, Sms[] timeline ) {
+		Sms unit = new Sms();
+		unit.action = segments[0].charAt(0);
+		unit.person = Integer.parseInt(segments[1]);
+		
+		timeline[currentTime] = unit;
+	}
 
 
 	
