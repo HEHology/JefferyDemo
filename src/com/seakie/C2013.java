@@ -1,6 +1,8 @@
 package com.seakie;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Scanner;
 
 public class C2013 {
@@ -63,6 +65,46 @@ public class C2013 {
 			System.out.println(i + " " + score[i]);
 		}
 		sc.close();
+	}
+
+	public static void q3From() {
+		Scanner sc = new Scanner(System.in);
+		int num = sc.nextInt();
+		sc.close();
+		
+		while (true){
+			num ++;
+			if (differentDigits(num) == true){
+				break;
+			}
+		}
+		
+		System.out.println(num);
+		
+	}
+
+	private static boolean differentDigits(int num) {
+		HashMap<Integer, Integer> countMap = new HashMap<>();
+		
+		while(num > 0){
+			int digit = num % 10;
+			num /= 10;
+			
+			if (countMap.containsKey(digit)){
+				countMap.put(digit, countMap.get(digit) + 1);
+			} else {
+				countMap.put(digit, 1);
+			}
+		}
+
+		boolean result = true;
+		for (Integer key : countMap.keySet()){
+			if (countMap.get(key) > 1){
+				result = false;
+			}
+		}
+		
+		return result;
 	}
 
 }
