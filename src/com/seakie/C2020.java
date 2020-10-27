@@ -1,6 +1,7 @@
 package com.seakie;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 class Node {
 	public int x;
@@ -83,6 +84,53 @@ public class C2020 {
 		}
 		
 		return local;
+	}
+
+	/*
+ABCCDEABAA
+ABCDE
+	 */
+	public static void q4Shift() {
+		Scanner scan = new Scanner(System.in);
+		String base = scan.nextLine();
+		String key = scan.nextLine();
+		scan.close();
+		
+		int len = key.length();
+		for (int index = 0; index < base.length() - len; index++){
+			String sub = base.substring(index, index + len);
+//			System.out.println(sub);
+			if (isShifts(sub, key)){
+				System.out.println("yes");
+				return;
+			}
+		}
+		System.out.println("no");
+//		for (int start = 0; start < base.length(); start++){
+//			for (int end = start; end <= base.length(); end++){
+//				String sub = base.substring(start, end);
+//				if (sub.length() == key.length()){
+////					System.out.println(sub);
+//					if (isShifts(sub, key) == true){
+//						System.out.println("yes");
+//						return;
+//					}
+//				}
+//			}
+//		}
+//		System.out.println("no");
+	}
+
+	private static boolean isShifts(String sub, String key) {
+		for (int times = 0; times < key.length(); times++){
+			char ch = key.charAt(0);
+			key = key.substring(1, key.length()) + ch;
+//			System.out.println(key);
+			if (sub.equals(key) == true){
+				return true;
+			}
+		}
+		return false;
 	}
 
 }
