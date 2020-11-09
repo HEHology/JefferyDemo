@@ -1,6 +1,7 @@
 package com.seakie;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class C2010 {
@@ -70,6 +71,102 @@ public class C2010 {
 		}
 
 		scan.close();
+	}
+
+	static HashMap<String, Integer> vars = new HashMap<String, Integer>();
+
+	public static void q3_Punchy() {
+		Scanner scan = new Scanner(System.in);
+		vars.put("A", 0);
+		vars.put("B", 0);
+		
+		while(true){
+			String input = scan.nextLine();
+			int state = getState(input);
+			
+//			System.out.println(state);
+			
+			switch (state) {
+			case 1:
+				setValue(input);
+				break;
+			case 2:
+				outputValue(input);
+				break;
+			case 3:
+				add(input);
+				break;
+			case 4:
+				multiply(input);
+				break;
+			case 5:
+				minus(input);
+				break;
+			case 6:
+				divide(input);
+				break;
+			case 7:
+				return;
+
+			default:
+				break;
+			}
+			
+//			System.out.println(vars.get("A") + " " + vars.get("B"));
+		}
+	}
+
+	private static void divide(String input) {
+		String[] parts = input.split(" ");
+		String varName1 = parts[1];
+		String varName2 = parts[2];
+		int result = vars.get(varName1) / vars.get(varName2);
+		vars.put(varName1, result);
+
+	}
+
+	private static void minus(String input) {
+		String[] parts = input.split(" ");
+		String varName1 = parts[1];
+		String varName2 = parts[2];
+		int result = vars.get(varName1) - vars.get(varName2);
+		vars.put(varName1, result);
+		
+	}
+
+	private static void multiply(String input) {
+		String[] parts = input.split(" ");
+		String varName1 = parts[1];
+		String varName2 = parts[2];
+		int result = vars.get(varName1) * vars.get(varName2);
+		vars.put(varName1, result);
+	}
+
+	private static void add(String input) {
+		String[] parts = input.split(" ");
+		String varName1 = parts[1];
+		String varName2 = parts[2];
+		int result = vars.get(varName1) + vars.get(varName2);
+		vars.put(varName1, result);
+	}
+
+	private static void outputValue(String input) {
+		String[] parts = input.split(" ");
+		String varName = parts[1];
+		System.out.println(vars.get(varName));
+	}
+
+	private static void setValue(String input) {
+		String[] parts = input.split(" ");
+		String varName = parts[1];
+		String varValue = parts[2];
+		vars.put(varName, Integer.parseInt(varValue));
+	}
+
+	private static int getState(String input) {
+		String[] parts = input.split(" ");
+		
+		return Integer.parseInt(parts[0]);
 	}
 
 	public static void q3Punchy() {
